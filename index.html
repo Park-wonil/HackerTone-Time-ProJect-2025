@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>회원가입 시스템</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="intro-video-container">
+      <video id="intro-video" autoplay muted>
+        <source src="projectmp4.mp4" type="video/mp4" />
+        브라우저가 video 태그를 지원하지 않습니다.
+      </video>
+    </div>
+
+    <div id="signup-container" style="display: none;">
+      <h2>회원가입</h2>
+      <input type="text" id="signup-id" placeholder="아이디" />
+      <input type="password" id="signup-pw" placeholder="비밀번호" />
+      <button onclick="register()">가입하기</button>
+    </div>
+
+    <div id="login-container" style="display: none;">
+      <h2>로그인</h2>
+      <input type="text" id="login-id" placeholder="아이디" />
+      <input type="password" id="login-pw" placeholder="비밀번호" />
+      <button onclick="login()">로그인</button>
+      <p id="login-result"></p>
+    </div>
+
+    <div id="welcome-container" style="display: none;">
+      <h2>🎉 로그인 성공! 환영합니다!</h2>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      const video = document.getElementById('intro-video');
+      const videoContainer = document.getElementById('intro-video-container');
+      const signupContainer = document.getElementById('signup-container');
+
+      video.addEventListener('ended', () => {
+        videoContainer.classList.add('fade-out');
+        setTimeout(() => {
+          videoContainer.style.display = 'none';
+          signupContainer.style.display = 'block';
+        }, 2000);
+      });
+    </script>
+  </body>
+</html>
