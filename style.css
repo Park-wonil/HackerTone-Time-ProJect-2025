@@ -1,0 +1,76 @@
+body {
+  font-family: 'Courier New', monospace;
+  background: #f0f8ff;
+  text-align: center;
+  padding: 2em;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+}
+
+img#alice {
+  transition: transform 0.3s ease;
+  width: 150px;
+}
+
+.controls button {
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.5em 1.2em;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#status {
+  margin-top: 1em;
+  font-weight: bold;
+}
+
+/* 문 애니메이션용 추가 */
+.door-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.door {
+  position: absolute;
+  top: 0;
+  width: 50vw;
+  height: 100vh;
+  background-color: #1c1c1c;
+  z-index: 10;
+  transition: transform 1.5s ease;
+}
+
+.left-door {
+  left: 0;
+  transform-origin: left center;
+}
+
+.right-door {
+  right: 0;
+  transform-origin: right center;
+}
+
+.door-open .left-door {
+  transform: rotateY(-90deg);
+}
+
+.door-open .right-door {
+  transform: rotateY(90deg);
+}
+
+.content-overlay {
+  position: relative;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 1s ease 1.5s;
+}
+
+.door-open .content-overlay {
+  opacity: 1;
+}

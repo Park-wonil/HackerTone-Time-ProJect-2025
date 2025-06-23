@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Time with Alice</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="door-container">
+      <div class="door left-door"></div>
+      <div class="door right-door"></div>
+
+      <div class="content-overlay">
+        <div class="container">
+          <h1>⏰ Time with Alice</h1>
+          <img id="alice" src="alice.jpg" alt="Alice" />
+          <div class="controls">
+            <button onclick="useTime(true)">✔️ 계획대로 보냄</button>
+            <button onclick="useTime(false)">❌ 낭비함</button>
+          </div>
+          <p id="status"></p>
+        </div>
+      </div>
+    </div>
+
+    <script src="wonil.js"></script>
+    <script src="door.js"></script>
+  </body>
+</html>
