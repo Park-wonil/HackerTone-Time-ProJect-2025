@@ -28,3 +28,10 @@ function login() {
     document.getElementById('login-result').textContent = '❌ 아이디 또는 비밀번호가 일치하지 않습니다.';
   }
 }
+setTimeout(() => {
+  document.getElementById('welcome-container').classList.add('fade-out');
+  setTimeout(() => {
+    document.getElementById('welcome-container').style.display = 'none';
+    document.querySelector('.container').style.display = 'block';
+  }, 2000);
+}, 1500);
