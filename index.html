@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Time with Alice</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div id="login-container" class="fade">
+    <h2>회원가입 또는 로그인</h2>
+    <input type="text" id="username" placeholder="아이디" />
+    <input type="password" id="password" placeholder="비밀번호" />
+    <div class="button-group">
+      <button onclick="login()">로그인</button>
+      <button onclick="register()">회원가입</button>
+    </div>
+  </div>
+
+  <div id="video-container" class="hidden">
+    <video id="intro-video" autoplay muted>
+      <source src="projectmp4.mp4" type="video/mp4" />
+      브라우저가 video 태그를 지원하지 않습니다.
+    </video>
+  </div>
+
+  <div id="main-content" class="hidden fade">
+    <h1>⏰ Time with Alice</h1>
+    <img src="Alice.jpg" alt="Alice" class="alice-img" />
+    <div class="button-group">
+      <button>✔ 계획대로 보냄</button>
+      <button>❌ 낭비함</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
