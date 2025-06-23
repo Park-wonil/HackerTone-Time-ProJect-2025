@@ -17,8 +17,3 @@ fetch('http://localhost:3000/log') // 나중에 이걸 GET으로 만들면 더 �
   .catch((err) => {
     console.error('서버 연결 실패:', err);
   });
-  window.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-      document.querySelector('.door-container').classList.add('door-open');
-    }, 500);
-  });
