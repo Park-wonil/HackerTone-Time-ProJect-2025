@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Time with Alice</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="login-container" class="fade-in">
+        <h2>회원가입 또는 로그인</h2>
+        <input type="text" id="userId" placeholder="아이디">
+        <input type="password" id="password" placeholder="비밀번호">
+        <div class="buttons">
+            <button onclick="login()">로그인</button>
+            <button onclick="register()">회원가입</button>
+        </div>
+    </div>
+
+    <div id="video-container" class="hidden">
+        <video id="introVideo" width="720" height="480" autoplay muted>
+            <source src="assets/projectmp4.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div id="main-content" class="hidden">
+        <h1>⏰ Time with Alice</h1>
+        <img src="assets/alice.jpg" alt="Alice" style="width:120px">
+        <div class="buttons">
+            <button>✔ 계획대로 보냄</button>
+            <button>❌ 낭비함</button>
+        </div>
+    </div>
+
+    <div id="fade" class="fade-out hidden"></div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
