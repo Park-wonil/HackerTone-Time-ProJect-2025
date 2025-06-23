@@ -26,12 +26,17 @@ function login() {
   const pw = document.getElementById('login-pw').value;
   const savedPw = localStorage.getItem('user_' + id);
   if (savedPw && savedPw === pw) {
-    // 로그인 페이드 효과
-    document.getElementById('fade-overlay').classList.add('show');
+    // 1. 오버레이 보여줌
+    const overlay = document.getElementById('fade-overlay');
+    overlay.classList.add('show');
 
-    const loginBox = document.getElementById('login-container');
+    // 2. 로그인 박스는 나중에 제거
     setTimeout(() => {
-      loginBox.style.display = 'none';
+      document.getElementById('login-container').style.display = 'none';
+    }, 2000);
+
+    // 3. 영상은 오버레이 끝나고 바로 시작
+    setTimeout(() => {
       const video = document.getElementById('intro-video');
       const videoContainer = document.getElementById('video-container');
       videoContainer.style.display = 'flex';
@@ -48,6 +53,7 @@ function login() {
     document.getElementById('login-result').textContent = '❌ 아이디 또는 비밀번호가 일치하지 않습니다.';
   }
 }
+
 function useTime(planned) {
   const status = document.getElementById('status');
   status.textContent = planned
