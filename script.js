@@ -26,8 +26,10 @@ function register() {
     alert('이미 존재하는 아이디입니다!');
     return;
   }
-  localStorage.setItem('user_' + id,
-    JSON.stringify({ pw, nickname, birth }));
+  localStorage.setItem(
+    'user_' + id,
+    JSON.stringify({ pw, nickname, birth })
+  );
   alert('회원가입이 완료되었습니다!');
   showLogin();
 }
@@ -36,10 +38,12 @@ function login() {
   const id = document.getElementById('login-id').value;
   const pw = document.getElementById('login-pw').value;
   const saved = localStorage.getItem('user_' + id);
-  const savedData = saved ? JSON.parse(saved) : null;
-  if (savedData && savedData.pw === pw) {
+  const savedPw = saved ? JSON.parse(saved).pw : null;
+
+  if (savedPw && savedPw === pw) {
+    // 원래 로그인 로직 복원
     loginMethod = 'local';
-    userName = savedData.nickname;
+    userName = JSON.parse(saved).nickname;
     proceedToVideo();
   } else {
     document.getElementById('login-result').textContent =
@@ -91,7 +95,7 @@ function proceedToVideo() {
 // 목표시간 선택박스 초기화
 function initTimeSelectors() {
   const hourSel = document.getElementById('goal-hour');
-  const minSel  = document.getElementById('goal-minute');
+  const minSel = document.getElementById('goal-minute');
   if (!hourSel || !minSel) return;
   for (let h = 0; h < 24; h++) {
     const o = document.createElement('option');
@@ -104,8 +108,6 @@ function initTimeSelectors() {
     minSel.append(o);
   }
 }
-
-// DOMContentLoaded 이벤트로만 초기화
 window.addEventListener('DOMContentLoaded', initTimeSelectors);
 
 function setGoalTime() {
@@ -117,9 +119,10 @@ function setGoalTime() {
   }
   const timeInput = `${h}:${m}`;
   const status = document.getElementById('status');
-  const msg = loginMethod === 'google'
-    ? `${userName} 님의 목표 시간은 ${timeInput}으로 설정되었습니다.`
-    : `${userName}님의 목표 시간은 ${timeInput}으로 설정되었습니다.`;
+  const msg =
+    loginMethod === 'google'
+      ? `${userName} 님의 목표 시간은 ${timeInput}으로 설정되었습니다.`
+      : `${userName}님의 목표 시간은 ${timeInput}으로 설정되었습니다.`;
   status.textContent = msg;
 
   const ac = document.getElementById('alice-container');
