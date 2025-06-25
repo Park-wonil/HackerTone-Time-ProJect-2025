@@ -7,7 +7,7 @@
   <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
-  <!-- 로그인 화면 -->
+  <!-- 로그인 화면 (변경 없음) -->
   <div id="login-container">
     <h2>로그인</h2>
     <input type="text" id="login-id" placeholder="아이디" />
@@ -17,22 +17,20 @@
       <div id="g_id_onload"
            data-client_id="6996944138-69l8kco2ra4ednqonpteqm7c0ghpvqns.apps.googleusercontent.com"
            data-callback="handleGoogleLogin"
-           data-auto_prompt="false">
-      </div>
+           data-auto_prompt="false"></div>
       <div class="g_id_signin"
            data-type="standard"
            data-size="large"
            data-theme="outline"
            data-text="sign_in_with"
            data-shape="rectangular"
-           data-logo_alignment="left">
-      </div>
+           data-logo_alignment="left"></div>
     </div>
     <p id="login-result"></p>
     <p><a href="#" onclick="showSignup()">회원가입</a></p>
   </div>
 
-  <!-- 회원가입 화면 -->
+  <!-- 회원가입 화면 (변경 없음) -->
   <div id="signup-container" style="display:none;">
     <h2>회원가입</h2>
     <input type="text" id="signup-id" placeholder="아이디" />
@@ -43,7 +41,7 @@
     <p><a href="#" onclick="showLogin()">← 로그인으로 돌아가기</a></p>
   </div>
 
-  <!-- 영상 화면 -->
+  <!-- 영상 화면 (변경 없음) -->
   <div id="video-container" class="fade" style="display:none;">
     <video id="intro-video" autoplay muted>
       <source src="projectmp4.mp4" type="video/mp4" />
@@ -51,7 +49,7 @@
     </video>
   </div>
 
-  <!-- Alice 화면: 목표 시간 설정 -->
+  <!-- Alice 화면: 목표 시간 설정 (설명 오버레이만 변경) -->
   <div id="alice-container" style="display:none;">
     <h1>⏰ Time with Alice</h1>
     <img id="alice-img" src="Alice.jpg" alt="Alice" />
@@ -64,8 +62,11 @@
     <p id="status"></p>
 
     <button id="toggle-desc">설명 보기</button>
+
+    <!-- 풀스크린 설명 오버레이 -->
     <div id="description-panel">
       <div class="desc-content">
+        <button id="close-desc" class="close-btn">✕</button>
         <ul>
           <li>매일 스스로 ‘게임·SNS 사용 시간’을 설정해요.</li>
           <li>목표 안에서는 앨리스가 활짝 웃어요 😊</li>
