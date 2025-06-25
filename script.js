@@ -126,9 +126,4 @@ function setGoalTime() {
   status.textContent = msg;
 
   const ac = document.getElementById('alice-container');
-  ac.classList.add('fade-out-short');
-  setTimeout(() => {
-    ac.style.display = 'none';
-    // TODO: 다음 화면 전환 로직
-  }, 1000);
 }
