@@ -56,7 +56,6 @@
     <h1>⏰ Time with Alice</h1>
     <img id="alice-img" src="Alice.jpg" alt="Alice" />
 
-    <!-- 목표 시간 설정 -->
     <div id="goal-container">
       <label>하루 목표 시간 설정 (24시간 HH:MM):</label>
       <select id="goal-hour"></select><span>:</span><select id="goal-minute"></select>
@@ -64,19 +63,21 @@
     </div>
     <p id="status"></p>
 
-    <!-- 설명 박스 토글 -->
     <button id="toggle-desc">설명 보기</button>
     <div id="description-panel">
-      <ul>
-        <li>매일 스스로 ‘게임·SNS 사용 시간’을 설정해요.</li>
-        <li>목표 안에서는 앨리스가 활짝 웃어요😊</li>
-        <li>초과하면 앨리스가 경고 애니메이션을 보여줘요!</li>
-        <li>달성 기록은 랭킹에 올라가 친구들과 경쟁할 수 있어요.</li>
-        <li>습관 통계로 주·월간 성장도 한눈에 확인!</li>
-      </ul>
+      <div class="desc-content">
+        <ul>
+          <li>매일 스스로 ‘게임·SNS 사용 시간’을 설정해요.</li>
+          <li>목표 안에서는 앨리스가 활짝 웃어요 😊</li>
+          <li>초과하면 앨리스가 경고 애니메이션을 보여줘요!</li>
+          <li>달성 기록은 랭킹에 올라가 친구들과 경쟁할 수 있어요.</li>
+          <li>습관 통계로 주·월간 성장도 한눈에 확인할 수 있어요.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
   <script src="script.js"></script>
 </body>
 </html>
+
