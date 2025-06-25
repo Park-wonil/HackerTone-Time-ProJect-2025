@@ -54,8 +54,8 @@
     <h1>⏰ Time with Alice</h1>
     <img id="alice-img" src="Alice.jpg" alt="Alice" />
     <div id="goal-container">
-      <label for="goal-time">하루 목표 시간 설정 (HH:MM):</label>
-      <input type="time" id="goal-time" max="24:00" lang="ko" />
+      <label>하루 목표 시간 설정 (24시간 HH:MM):</label>
+      <select id="goal-hour"></select><span>:</span><select id="goal-minute"></select>
       <button onclick="setGoalTime()">설정</button>
     </div>
     <p id="status"></p>
