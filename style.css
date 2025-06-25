@@ -7,12 +7,11 @@ body {
   padding: 2em;
 }
 
-input {
-  display: block;
-  margin: 1em auto;
+input, select {
+  display: inline-block;
+  margin: 0.5em;
   padding: 0.6em;
   font-size: 1em;
-  width: 220px;
 }
 
 button {
@@ -51,24 +50,14 @@ html, body {
 
 #video-container {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-  padding: 0;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
 }
 
 video {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
   object-fit: fill;
   z-index: -1;
-  margin: 0;
-  padding: 0;
-  border: none;
 }
-
