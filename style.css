@@ -12,35 +12,52 @@ input, select, button {
   margin: 0.5em;
   padding: 0.6em;
 }
-button { cursor: pointer; }
 
-/* Alice 화면 기본 */
+button {
+  cursor: pointer;
+}
+
+/* 로그인/비디오 페이드 */
+.fade {
+  transition: opacity 2s ease;
+}
+#video-container.fade-out {
+  opacity: 0;
+}
+
+/* Alice 화면 짧은 페이드아웃 (1초) */
+#alice-container.fade-out-short {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+/* Alice 화면 레이아웃 */
 #alice-container {
   position: relative;
-  display: inline-block;
-  background: #fff;
+  z-index: 10;
+  padding: 1em;
   border: 2px solid #88b0d3;
   border-radius: 8px;
-  padding: 1.5em;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  background: #fff;
+  display: inline-block;
 }
 
 /* 설명 토글 버튼 */
 #toggle-desc {
   display: block;
-  margin: 1em auto 0;
+  margin: 1em auto;
   background: #88b0d3;
   color: #fff;
   border: none;
   border-radius: 4px;
 }
 
-/* 설명 패널 - 기본 숨김 */
+/* 설명 패널 */
 #description-panel {
   display: none;
   position: absolute;
-  bottom: 1.5em;
-  left: 1.5em;
+  bottom: 1em;
+  left: 1em;
   width: 260px;
   max-height: 200px;
   overflow-y: auto;
@@ -53,12 +70,7 @@ button { cursor: pointer; }
   font-size: 0.9em;
 }
 
-/* 설명 패널 열렸을 때 */
-#description-panel.open {
-  display: block;
-}
-
-/* (기존) Google 버튼 중앙 배치 & 확대 */
+/* Google 버튼 중앙 배치 및 확대 */
 #google-btn-container {
   display: flex;
   justify-content: center;
@@ -70,7 +82,23 @@ button { cursor: pointer; }
   transform-origin: center center;
 }
 
-/* 비디오 컨테이너에만 숨김 적용 */
-#video-container {
+/* 여백 제거 및 풀스크린 비디오 설정 */
+html, body {
+  margin: 0;
+  padding: 0;
   overflow: hidden;
+}
+
+#video-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+}
+
+video {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  object-fit: fill;
+  z-index: -1;
 }
