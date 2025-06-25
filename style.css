@@ -25,12 +25,6 @@ button {
   opacity: 0;
 }
 
-/* Alice 화면 짧은 페이드아웃 (1초) */
-#alice-container.fade-out-short {
-  opacity: 0;
-  transition: opacity 1s ease;
-}
-
 /* Alice 화면 레이아웃 */
 #alice-container {
   position: relative;
@@ -82,7 +76,7 @@ button {
   transform-origin: center center;
 }
 
-/* 여백 제거 및 풀스크린 비디오 설정 */
+/* 풀스크린 비디오 설정 */
 html, body {
   margin: 0;
   padding: 0;
@@ -99,6 +93,7 @@ video {
   position: fixed;
   top: 0; left: 0;
   width: 100vw; height: 100vh;
-  object-fit: fill;
+  object-fit: fill;   /* 변경: fill 로 화면 꽉 채움(비율 무시) */
   z-index: -1;
 }
+
