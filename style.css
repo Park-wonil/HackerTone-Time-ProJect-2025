@@ -36,6 +36,12 @@ button {
   transition: opacity 1s ease;
 }
 
+/* Alice 컨테이너 최상위로 올려 클릭 보장 */
+#alice-container {
+  position: relative;
+  z-index: 10;
+}
+
 img#alice-img {
   width: 180px;
   margin-top: 1em;
