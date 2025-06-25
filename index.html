@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -17,10 +16,13 @@
 
     <!-- Google 로그인 버튼 중앙 컨테이너 -->
     <div id="google-btn-container">
+      <!-- One-Tap Prompt 비활성화 -->
       <div id="g_id_onload"
            data-client_id="6996944138-69l8kco2ra4ednqonpteqm7c0ghpvqns.apps.googleusercontent.com"
-           data-callback="handleGoogleLogin">
+           data-callback="handleGoogleLogin"
+           data-auto_prompt="false">
       </div>
+      <!-- 표준 버튼 -->
       <div class="g_id_signin"
            data-type="standard"
            data-size="large"
@@ -69,4 +71,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
