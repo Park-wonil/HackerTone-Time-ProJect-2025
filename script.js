@@ -1,3 +1,5 @@
+// script.js
+
 let loginMethod = '';
 let userName = '';
 
@@ -5,10 +7,12 @@ function showSignup() {
   document.getElementById('login-container').style.display = 'none';
   document.getElementById('signup-container').style.display = 'block';
 }
+
 function showLogin() {
   document.getElementById('signup-container').style.display = 'none';
   document.getElementById('login-container').style.display = 'block';
 }
+
 function register() {
   const id = document.getElementById('signup-id').value;
   const pw = document.getElementById('signup-pw').value;
@@ -34,7 +38,6 @@ function login() {
   const saved = localStorage.getItem('user_' + id);
   const savedData = saved ? JSON.parse(saved) : null;
   if (savedData && savedData.pw === pw) {
-    // 로컬 로그인 성공 시
     loginMethod = 'local';
     userName = savedData.nickname;
     proceedToVideo();
@@ -44,12 +47,24 @@ function login() {
   }
 }
 
-// 구글 로그인 콜백
+// JWT 페이로드 안전 디코딩
+function decodeJwtResponse(token) {
+  const base64Url = token.split('.')[1];
+  let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  while (base64.length % 4) base64 += '=';
+  const json = decodeURIComponent(
+    atob(base64)
+      .split('')
+      .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+      .join('')
+  );
+  return JSON.parse(json);
+}
+
 function handleGoogleLogin(response) {
-  // JWT 디코딩으로 사용자 이름 추출
-  const payload = JSON.parse(atob(response.credential.split('.')[1]));
+  const payload = decodeJwtResponse(response.credential);
   loginMethod = 'google';
-  userName = payload.name;
+  userName = payload.name || payload.given_name || payload.email.split('@')[0];
   proceedToVideo();
 }
 
@@ -59,42 +74,54 @@ function proceedToVideo() {
   loginBox.style.opacity = '0';
   setTimeout(() => {
     loginBox.style.display = 'none';
-    const videoContainer = document.getElementById('video-container');
+    const vc = document.getElementById('video-container');
     const video = document.getElementById('intro-video');
-    videoContainer.style.display = 'flex';
+    vc.style.display = 'flex';
     video.play().catch(console.error);
     video.addEventListener('ended', () => {
-      videoContainer.classList.add('fade-out');
+      vc.classList.add('fade-out');
       setTimeout(() => {
-        videoContainer.style.display = 'none';
+        vc.style.display = 'none';
         document.getElementById('alice-container').style.display = 'block';
       }, 2000);
     });
   }, 2000);
 }
 
-// 목표 시간 설정 및 짧은 페이드아웃 (1초)
+// 페이지 로드 시 24시간 선택박스 채우기
+document.addEventListener('DOMContentLoaded', () => {
+  const hourSel = document.getElementById('goal-hour');
+  const minSel  = document.getElementById('goal-minute');
+  for (let h = 0; h < 24; h++) {
+    const o = document.createElement('option');
+    o.value = o.textContent = String(h).padStart(2, '0');
+    hourSel.append(o);
+  }
+  for (let m = 0; m < 60; m++) {
+    const o = document.createElement('option');
+    o.value = o.textContent = String(m).padStart(2, '0');
+    minSel.append(o);
+  }
+});
+
 function setGoalTime() {
-  const timeInput = document.getElementById('goal-time').value;
-  const status = document.getElementById('status');
-  if (!timeInput) {
+  const h = document.getElementById('goal-hour').value;
+  const m = document.getElementById('goal-minute').value;
+  if (h === '' || m === '') {
     alert('목표 시간을 선택해주세요.');
     return;
   }
-  // 로그인 방식에 따라 다른 메시지
-  let message = '';
-  if (loginMethod === 'google') {
-    message = `${userName} 님의 목표 시간은 ${timeInput}으로 설정되었습니다.`;
-  } else {
-    message = `${userName}님의 목표 시간은 ${timeInput}으로 설정되었습니다.`;
-  }
-  status.textContent = message;
+  const timeInput = `${h}:${m}`;
+  const status = document.getElementById('status');
+  const msg = loginMethod === 'google'
+    ? `${userName} 님의 목표 시간은 ${timeInput}으로 설정되었습니다.`
+    : `${userName}님의 목표 시간은 ${timeInput}으로 설정되었습니다.`;
+  status.textContent = msg;
 
-  // 1초간의 CSS transition으로 페이드아웃
-  const aliceContainer = document.getElementById('alice-container');
-  aliceContainer.classList.add('fade-out-short');
+  const ac = document.getElementById('alice-container');
+  ac.classList.add('fade-out-short');
   setTimeout(() => {
-    aliceContainer.style.display = 'none';
-    // TODO: 다음 화면 전환 로직 추가
+    ac.style.display = 'none';
+    // TODO: 다음 화면 전환 로직
   }, 1000);
 }
