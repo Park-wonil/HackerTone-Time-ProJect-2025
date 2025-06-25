@@ -3,7 +3,49 @@
 let loginMethod = '';
 let userName = '';
 
-// 로그인/회원가입, 구글 로그인, proceedToVideo 등 기존 로직은 이전과 동일…
+function showSignup() {
+  document.getElementById('login-container').style.display = 'none';
+  document.getElementById('signup-container').style.display = 'block';
+}
+
+function showLogin() {
+  document.getElementById('signup-container').style.display = 'none';
+  document.getElementById('login-container').style.display = 'block';
+}
+
+function register() {
+  const id = document.getElementById('signup-id').value;
+  const pw = document.getElementById('signup-pw').value;
+  const nickname = document.getElementById('signup-nickname').value;
+  const birth = document.getElementById('signup-birth').value;
+  if (!id || !pw || !nickname || !birth) {
+    alert('모든 정보를 입력하세요!');
+    return;
+  }
+  if (localStorage.getItem('user_' + id)) {
+    alert('이미 존재하는 아이디입니다!');
+    return;
+  }
+  localStorage.setItem('user_' + id,
+    JSON.stringify({ pw, nickname, birth }));
+  alert('회원가입이 완료되었습니다!');
+  showLogin();
+}
+
+function login() {
+  const id = document.getElementById('login-id').value;
+  const pw = document.getElementById('login-pw').value;
+  const saved = localStorage.getItem('user_' + id);
+  const savedData = saved ? JSON.parse(saved) : null;
+  if (savedData && savedData.pw === pw) {
+    loginMethod = 'local';
+    userName = savedData.nickname;
+    proceedToVideo();
+  } else {
+    document.getElementById('login-result').textContent =
+      '❌ 아이디 또는 비밀번호가 일치하지 않습니다.';
+  }
+}
 
 // JWT 페이로드 안전 디코딩
 function decodeJwtResponse(token) {
@@ -26,7 +68,27 @@ function handleGoogleLogin(response) {
   proceedToVideo();
 }
 
-// 목표시간 선택박스 초기화 (DOMContentLoaded 여부 관계없이 즉시 실행)
+function proceedToVideo() {
+  const loginBox = document.getElementById('login-container');
+  loginBox.classList.add('fade');
+  loginBox.style.opacity = '0';
+  setTimeout(() => {
+    loginBox.style.display = 'none';
+    const vc = document.getElementById('video-container');
+    const video = document.getElementById('intro-video');
+    vc.style.display = 'flex';
+    video.play().catch(console.error);
+    video.addEventListener('ended', () => {
+      vc.classList.add('fade-out');
+      setTimeout(() => {
+        vc.style.display = 'none';
+        document.getElementById('alice-container').style.display = 'block';
+      }, 2000);
+    });
+  }, 2000);
+}
+
+// 목표시간 선택박스 초기화
 function initTimeSelectors() {
   const hourSel = document.getElementById('goal-hour');
   const minSel  = document.getElementById('goal-minute');
@@ -42,11 +104,9 @@ function initTimeSelectors() {
     minSel.append(o);
   }
 }
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initTimeSelectors);
-} else {
-  initTimeSelectors();
-}
+
+// DOMContentLoaded 이벤트로만 초기화
+window.addEventListener('DOMContentLoaded', initTimeSelectors);
 
 function setGoalTime() {
   const h = document.getElementById('goal-hour').value;
