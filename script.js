@@ -124,6 +124,4 @@ function setGoalTime() {
       ? `${userName} 님의 목표 시간은 ${timeInput}으로 설정되었습니다.`
       : `${userName}님의 목표 시간은 ${timeInput}으로 설정되었습니다.`;
   status.textContent = msg;
-
-  const ac = document.getElementById('alice-container');
 }
