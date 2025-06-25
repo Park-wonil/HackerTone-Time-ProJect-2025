@@ -30,11 +30,7 @@ button {
   opacity: 0;
 }
 
-/* Alice 화면 짧은 페이드아웃 (1초) */
-#alice-container.fade-out-short {
-  opacity: 0;
-  transition: opacity 1s ease;
-}
+
 
 /* Alice 화면을 최상위로 */
 #alice-container {
