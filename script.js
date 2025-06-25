@@ -1,13 +1,4 @@
-let loginMethod = '';
-let userName = '';
-
-function showSignup() { /* … */ }
-function showLogin()  { /* … */ }
-function register()   { /* … */ }
-function login()      { /* … */ }
-function decodeJwtResponse(token) { /* … */ }
-function handleGoogleLogin(response) { /* … */ }
-function proceedToVideo() { /* … */ }
+// …이전 로그인/영상 전환 로직 생략…
 
 // 목표시간 선택박스 초기화
 function initTimeSelectors() {
@@ -27,21 +18,6 @@ function initTimeSelectors() {
 }
 window.addEventListener('DOMContentLoaded', initTimeSelectors);
 
-// 목표시간 설정 및 설명 토글
-document.addEventListener('DOMContentLoaded', () => {
-  const toggleBtn = document.getElementById('toggle-desc');
-  const descPanel = document.getElementById('description-panel');
-  toggleBtn.addEventListener('click', () => {
-    if (descPanel.style.display === 'block') {
-      descPanel.style.display = 'none';
-      toggleBtn.textContent = '설명 보기';
-    } else {
-      descPanel.style.display = 'block';
-      toggleBtn.textContent = '설명 닫기';
-    }
-  });
-});
-
 function setGoalTime() {
   const h = document.getElementById('goal-hour').value;
   const m = document.getElementById('goal-minute').value;
@@ -50,9 +26,16 @@ function setGoalTime() {
     return;
   }
   const timeInput = `${h}:${m}`;
-  const status = document.getElementById('status');
-  const msg = loginMethod === 'google'
-    ? `${userName} 님의 목표 시간은 ${timeInput}으로 설정되었습니다.`
-    : `${userName}님의 목표 시간은 ${timeInput}으로 설정되었습니다.`;
-  status.textContent = msg;
+  document.getElementById('status').textContent =
+    loginMethod === 'google'
+      ? `${userName} 님의 목표 시간은 ${timeInput}으로 설정되었습니다.`
+      : `${userName}님의 목표 시간은 ${timeInput}으로 설정되었습니다.`;
 }
+
+// 설명 토글 처리
+document.getElementById('toggle-desc').addEventListener('click', () => {
+  const panel = document.getElementById('description-panel');
+  panel.classList.toggle('open');
+  document.getElementById('toggle-desc').textContent =
+    panel.classList.contains('open') ? '설명 닫기' : '설명 보기';
+});
