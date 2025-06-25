@@ -7,56 +7,13 @@
   <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
-  <!-- 로그인 화면 -->
-  <div id="login-container">
-    <h2>로그인</h2>
-    <input type="text" id="login-id" placeholder="아이디" />
-    <input type="password" id="login-pw" placeholder="비밀번호" />
-    <button onclick="login()">로그인</button>
-    <div id="google-btn-container">
-      <div id="g_id_onload"
-           data-client_id="6996944138-69l8kco2ra4ednqonpteqm7c0ghpvqns.apps.googleusercontent.com"
-           data-callback="handleGoogleLogin"
-           data-auto_prompt="false">
-      </div>
-      <div class="g_id_signin"
-           data-type="standard"
-           data-size="large"
-           data-theme="outline"
-           data-text="sign_in_with"
-           data-shape="rectangular"
-           data-logo_alignment="left">
-      </div>
-    </div>
-    <p id="login-result"></p>
-    <p><a href="#" onclick="showSignup()">회원가입</a></p>
-  </div>
-
-  <!-- 회원가입 화면 -->
-  <div id="signup-container" style="display:none;">
-    <h2>회원가입</h2>
-    <input type="text" id="signup-id" placeholder="아이디" />
-    <input type="password" id="signup-pw" placeholder="비밀번호" />
-    <input type="text" id="signup-nickname" placeholder="닉네임" />
-    <input type="date" id="signup-birth" placeholder="생년월일" />
-    <button onclick="register()">가입하기</button>
-    <p><a href="#" onclick="showLogin()">← 로그인으로 돌아가기</a></p>
-  </div>
-
-  <!-- 영상 화면 -->
-  <div id="video-container" class="fade" style="display:none;">
-    <video id="intro-video" autoplay muted>
-      <source src="projectmp4.mp4" type="video/mp4" />
-      브라우저가 video 태그를 지원하지 않습니다.
-    </video>
-  </div>
+  <!-- 로그인 화면 생략… -->
 
   <!-- Alice 화면: 목표 시간 설정 -->
   <div id="alice-container" style="display:none;">
     <h1>⏰ Time with Alice</h1>
     <img id="alice-img" src="Alice.jpg" alt="Alice" />
 
-    <!-- 목표 시간 설정 -->
     <div id="goal-container">
       <label>하루 목표 시간 설정 (24시간 HH:MM):</label>
       <select id="goal-hour"></select><span>:</span><select id="goal-minute"></select>
@@ -64,15 +21,15 @@
     </div>
     <p id="status"></p>
 
-    <!-- 설명 박스 토글 -->
+    <!-- 설명 토글 -->
     <button id="toggle-desc">설명 보기</button>
     <div id="description-panel">
       <ul>
-        <li>매일 스스로 ‘게임·SNS 사용 시간’을 설정해요.</li>
-        <li>목표 안에서는 앨리스가 활짝 웃어요😊</li>
-        <li>초과하면 앨리스가 경고 애니메이션을 보여줘요!</li>
+        <li>매일 스스로 ‘게임·SNS 사용 시간’을 설정합니다.</li>
+        <li>목표 안에서는 앨리스가 활짝 웃어요 😊</li>
+        <li>초과하면 앨리스가 경고 애니메이션을 보여줍니다!</li>
         <li>달성 기록은 랭킹에 올라가 친구들과 경쟁할 수 있어요.</li>
-        <li>습관 통계로 주·월간 성장도 한눈에 확인!</li>
+        <li>습관 통계로 주·월간 성장도 확인할 수 있습니다.</li>
       </ul>
     </div>
   </div>
