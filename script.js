@@ -1,5 +1,3 @@
-// script.js
-
 let loginMethod = '';
 let userName = '';
 
@@ -27,8 +25,7 @@ function register() {
     alert('이미 존재하는 아이디입니다!');
     return;
   }
-  localStorage.setItem('user_' + id,
-    JSON.stringify({ pw, nickname, birth }));
+  localStorage.setItem('user_' + id, JSON.stringify({ pw, nickname, birth }));
   alert('회원가입이 완료되었습니다!');
   showLogin();
 }
@@ -49,7 +46,7 @@ function login() {
   }
 }
 
-// Google JWT 디코딩
+// JWT 페이로드 안전 디코딩
 function decodeJwtResponse(token) {
   const base64Url = token.split('.')[1];
   let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -94,7 +91,7 @@ function proceedToVideo() {
 
 // 페이지 로드 후 초기화
 window.addEventListener('DOMContentLoaded', () => {
-  // 목표시간 셀렉터 채우기
+  // 목표시간 선택박스 초기화
   const hourSel = document.getElementById('goal-hour');
   const minSel = document.getElementById('goal-minute');
   if (hourSel && minSel) {
@@ -113,15 +110,19 @@ window.addEventListener('DOMContentLoaded', () => {
   // 설명 토글 처리
   const toggleBtn = document.getElementById('toggle-desc');
   const descPanel = document.getElementById('description-panel');
+  const closeBtn = document.getElementById('close-desc');
   if (toggleBtn && descPanel) {
     toggleBtn.addEventListener('click', () => {
-      if (descPanel.style.display === 'block') {
-        descPanel.style.display = 'none';
-        toggleBtn.textContent = '설명 보기';
-      } else {
-        descPanel.style.display = 'block';
-        toggleBtn.textContent = '설명 닫기';
-      }
+      descPanel.classList.toggle('open');
+      toggleBtn.textContent = descPanel.classList.contains('open')
+        ? '설명 닫기'
+        : '설명 보기';
+    });
+  }
+  if (closeBtn && descPanel) {
+    closeBtn.addEventListener('click', () => {
+      descPanel.classList.remove('open');
+      toggleBtn.textContent = '설명 보기';
     });
   }
 });
@@ -140,4 +141,3 @@ function setGoalTime() {
       ? `${userName} 님의 목표 시간은 ${timeInput}으로 설정되었습니다.`
       : `${userName}님의 목표 시간은 ${timeInput}으로 설정되었습니다.`;
 }
-
