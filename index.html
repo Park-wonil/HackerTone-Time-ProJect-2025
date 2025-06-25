@@ -1,4 +1,4 @@
-
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -37,7 +37,6 @@
     <input type="password" id="signup-pw" placeholder="비밀번호" />
     <input type="text" id="signup-nickname" placeholder="닉네임" />
     <input type="date" id="signup-birth" placeholder="생년월일" />
-
     <button onclick="register()">가입하기</button>
     <p><a href="#" onclick="showLogin()">← 로그인으로 돌아가기</a></p>
   </div>
@@ -50,13 +49,14 @@
     </video>
   </div>
 
-  <!-- Alice 화면 -->
+  <!-- Alice 화면: 목표 시간 설정 -->
   <div id="alice-container" style="display:none;">
     <h1>⏰ Time with Alice</h1>
     <img id="alice-img" src="Alice.jpg" alt="Alice" />
-    <div class="controls">
-      <button onclick="useTime(true)">✔ 계획대로 보냄</button>
-      <button onclick="useTime(false)">❌ 낭비함</button>
+    <div id="goal-container">
+      <label for="goal-time">하루 목표 시간 설정 (HH:MM):</label>
+      <input type="time" id="goal-time" max="24:00" />
+      <button onclick="setGoalTime()">설정</button>
     </div>
     <p id="status"></p>
   </div>
