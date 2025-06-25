@@ -1,3 +1,4 @@
+/* style.css */
 
 body {
   background-color: #eaf6ff;
@@ -5,6 +6,7 @@ body {
   text-align: center;
   padding: 2em;
 }
+
 input {
   display: block;
   margin: 1em auto;
@@ -12,6 +14,7 @@ input {
   font-size: 1em;
   width: 220px;
 }
+
 button {
   padding: 0.6em 1.2em;
   font-size: 1em;
@@ -19,18 +22,26 @@ button {
   margin: 0.5em;
   cursor: pointer;
 }
+
+/* 로그인/비디오 페이드 */
 .fade {
   transition: opacity 2s ease;
 }
 #video-container.fade-out {
   opacity: 0;
 }
+
+/* Alice 화면 짧은 페이드아웃 (1초) */
+#alice-container.fade-out-short {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
 img#alice-img {
   width: 180px;
   margin-top: 1em;
 }
 
-/* ————————————————————————————— */
 /* 여백 제거 및 풀스크린 비디오 설정 */
 html, body {
   margin: 0;
@@ -54,7 +65,7 @@ video {
   left: 0;
   width: 100vw;
   height: 100vh;
-  object-fit: fill;    /* ← cover → fill */
+  object-fit: fill;
   z-index: -1;
   margin: 0;
   padding: 0;
