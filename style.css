@@ -1,5 +1,6 @@
-/* style.css - 기존 내용 전부 그대로 유지 */
+/* style.css */
 
+/* 기본 레이아웃 */
 body {
   background-color: #eaf6ff;
   font-family: 'Courier New', monospace;
@@ -7,28 +8,41 @@ body {
   padding: 2em;
 }
 
+/* 입력 폼, 버튼 기본 */
 input, select, button {
   font-size: 1em;
   margin: 0.5em;
   padding: 0.6em;
 }
-button { cursor: pointer; }
+button {
+  cursor: pointer;
+}
 
-/* 로그인↔영상 페이드아웃 */
-.fade { transition: opacity 2s ease; }
-#video-container.fade-out { opacity: 0; }
+/* 로그인→영상 페이드아웃 */
+.fade {
+  transition: opacity 2s ease;
+}
+#video-container.fade-out {
+  opacity: 0;
+}
 
 /* 풀스크린 비디오 */
-html, body { margin: 0; padding: 0; overflow: hidden; }
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
 #video-container {
   position: fixed;
   top: 0; left: 0;
-  width: 100vw; height: 100vh;
+  width: 100vw;
+  height: 100vh;
 }
 video {
   position: fixed;
   top: 0; left: 0;
-  width: 100vw; height: 100vh;
+  width: 100vw;
+  height: 100vh;
   object-fit: fill;
   z-index: -1;
 }
@@ -44,7 +58,7 @@ video {
   display: inline-block;
 }
 
-/* Google 버튼 중앙·확대 */
+/* Google 로그인 버튼 중앙·확대 */
 #google-btn-container {
   display: flex;
   justify-content: center;
@@ -56,12 +70,13 @@ video {
   transform-origin: center center;
 }
 
-/* ▶ 설명 오버레이 스타일 (변경된 부분) ◀ */
+/* ▶ 풀스크린 설명 오버레이 (업데이트) ◀ */
 #description-panel {
   display: none;
   position: fixed;
   top: 0; left: 0;
-  width: 100vw; height: 100vh;
+  width: 100vw;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.6);
   z-index: 100;
 }
@@ -72,24 +87,27 @@ video {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 80vw; max-width: 400px;
-  max-height: 70vh;
+  width: 90vw;           /* 너비 90% */
+  max-width: 600px;      /* 최대 600px */
+  max-height: 80vh;      /* 높이 80% */
   overflow-y: auto;
   background: #f0f8ff;
-  border: 2px solid #88b0d3;
-  border-radius: 8px;
-  padding: 1em;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  border: 3px solid #88b0d3;  /* 테두리 두께 업 */
+  border-radius: 12px;        /* 모서리 둥글게 업 */
+  padding: 2em;               /* 패딩 늘림 */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
   text-align: left;
-  font-size: 0.9em;
+  font-size: 1.1em;           /* 글자 크기 확대 */
+  line-height: 1.6;           /* 줄간격 확대 */
 }
 
 /* 닫기 버튼 */
 .close-btn {
   position: absolute;
-  top: 8px; right: 8px;
+  top: 12px; right: 12px;
   background: transparent;
   border: none;
-  font-size: 1.2em;
+  font-size: 1.4em;    /* 버튼 크기 업 */
   cursor: pointer;
+  color: #333;
 }
