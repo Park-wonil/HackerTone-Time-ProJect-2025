@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Time with Alice</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        height: 100%;
+      }
+
+      /* 배경 영상 스타일 */
+      #bg-video {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        z-index: -1;
+      }
+
+      /* 로그인 박스 꾸미기 */
+      #login-container,
+      #signup-container {
+        background: rgba(255, 255, 255, 0.85);
+        padding: 2rem;
+        border-radius: 20px;
+        width: 320px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(8px);
+        z-index: 1;
+        position: relative;
+        margin: 100px auto;
+      }
+
+      #login-container input,
+      #signup-container input {
+        width: 100%;
+        padding: 12px;
+        margin: 8px 0;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+      }
+
+      #login-container button,
+      #signup-container button {
+        width: 100%;
+        padding: 12px;
+        background-color: #4c6ef5;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      #login-container button:hover,
+      #signup-container button:hover {
+        background-color: #364fc7;
+      }
+
+      #login-container a,
+      #signup-container a {
+        display: block;
+        margin-top: 1rem;
+        text-decoration: none;
+        color: #4c6ef5;
+        font-weight: bold;
+      }
+
+      .fullscreen-gif {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+      }
+
+      #intro-gif-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: black;
+        z-index: 9999;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 배경 영상 -->
+    <video autoplay muted loop playsinline id="bg-video">
+      <source src="background.mp4" type="video/mp4" />
+    </video>
+
+    <!-- 로그인 화면 -->
+    <div id="login-container">
+      <h2>로그인</h2>
+      <input type="text" id="login-id" placeholder="아이디" />
+      <input type="password" id="login-pw" placeholder="비밀번호" />
+      <button onclick="login()">로그인</button>
+      <div id="google-btn-container">
+        <div
+          id="g_id_onload"
+          data-client_id="6996944138-69l8kco2ra4ednqonpteqm7c0ghpvqns.apps.googleusercontent.com"
+          data-callback="handleGoogleLogin"
+          data-auto_prompt="false"
+        ></div>
+        <div
+          class="g_id_signin"
+          data-type="standard"
+          data-size="large"
+          data-theme="outline"
+          data-text="sign_in_with"
+          data-shape="rectangular"
+          data-logo_alignment="left"
+        ></div>
+      </div>
+      <p id="login-result"></p>
+      <p><a href="#" onclick="showSignup()">회원가입</a></p>
+    </div>
+
+    <!-- 회원가입 화면 -->
+    <div id="signup-container" style="display: none">
+      <h2>회원가입</h2>
+      <input type="text" id="signup-id" placeholder="아이디" />
+      <input type="password" id="signup-pw" placeholder="비밀번호" />
+      <input type="text" id="signup-nickname" placeholder="닉네임" />
+      <input type="date" id="signup-birth" placeholder="생년월일" />
+      <button onclick="register()">가입하기</button>
+      <p><a href="#" onclick="showLogin()">← 로그인으로 돌아가기</a></p>
+    </div>
+
+    <!-- intro 전환용 gif -->
+    <div id="intro-gif-container">
+      <img
+        src="midalice-once.gif"
+        class="fullscreen-gif"
+        alt="Intro Transition"
+      />
+    </div>
+
+    <!-- 로그인 후 영상 화면 -->
+    <div
+      id="video-container"
+      style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: black;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      "
+    >
+      <video
+        id="intro-video"
+        autoplay
+        muted
+        style="width: 100vw; height: 100vh; object-fit: cover"
+      >
+        <source src="projectmp4.mp4" type="video/mp4" />
+        브라우저가 video 태그를 지원하지 않습니다.
+      </video>
+    </div>
+
+    <!-- 목표 설정 화면 -->
+    <div id="alice-container" style="display: none">
+      <video autoplay muted loop playsinline id="alice-bg-video">
+        <source src="background3.mp4" type="video/mp4" />
+      </video>
+
+      <div
+        id="countdown-timer"
+        style="font-size: 2rem; margin-top: 1rem; font-weight: bold"
+      ></div>
+      <h1>⏰ Time with Alice</h1>
+      <img id="alice-img" class="goal-alice" src="Alice.png" alt="Alice" />
+      <div class="goal-wrapper">
+        <div id="goal-container">
+          <label>하루 목표 시간 설정 (24시간 HH:MM):</label>
+          <select id="goal-hour"></select>
+          <span>:</span>
+          <select id="goal-minute"></select>
+          <button onclick="setGoalTime()">설정</button>
+        </div>
+      </div>
+
+      <p id="goal-status"></p>
+
+      <button id="toggle-desc">설명 보기</button>
+
+      <div id="modal-overlay" style="display: none">
+        <div id="modal-box">
+          <button id="close-modal">✕</button>
+          <ul>
+            <li>매일 스스로 ‘게임·SNS 사용 시간’을 설정해요.</li>
+            <li>목표 안에서는 앨리스가 활짝 웃어요 😊</li>
+            <li>초과하면 앨리스가 경고 애니메이션을 보여줘요!</li>
+            <li>달성 기록은 랭킹에 올라가 친구들과 경쟁할 수 있어요.</li>
+            <li>습관 통계로 주·월간 성장도 한눈에 확인할 수 있어요.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 메인 낭비 시간 화면 -->
+    <div id="main-container" style="display: none">
+      <video autoplay muted loop playsinline id="main-bg-video">
+        <source src="background2.mp4" type="video/mp4" />
+      </video>
+
+      <h1 id="total-time-heading">총 사용 시간: 계산 중...</h1>
+      <div class="alice-container">
+        <img src="alice.png" alt="Alice" class="alice-img" />
+
+        <!-- 막대그래프 컨테이너 추가 -->
+        <div id="bar-chart" class="bar-container">
+          <div id="youtube-bar" class="bar youtube-bar"><span></span></div>
+          <div id="instagram-bar" class="bar instagram-bar"><span></span></div>
+        </div>
+
+        <button onclick="location.href='ranking.html'" class="ranking-btn">
+          🧠 랭킹 보러가기
+        </button>
+      </div>
+    </div>
+
+    <!-- script.js 포함 -->
+    <script src="script.js"></script>
+  </body>
+</html>
